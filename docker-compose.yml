@@ -3,6 +3,8 @@ services:
   web:
     build: ./GreetingsApp
     hostname: greetingsweb
+    labels:
+      app.description: "12FactorTutorial"
     ports:
       - "5000:5000"
     environment:
@@ -19,5 +21,9 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+      - my-datavolume:/var/lib/mysql
     healthcheck:
       test: mysqladmin ping -h localhost -p$$MYSQL_ROOT_PASSWORD && test '0' -eq $$(ps aux | awk '{print $$11}' | grep -c -e '^mysql$$')
+volumes:
+  my-datavolume:
