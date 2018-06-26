@@ -8,14 +8,14 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - Database__Greetings=Server=greetings_db;Uid=root;Pwd=root;Database=Greetings
-      - Database__GreetingsDb=Server=greetings_db;Uid=root;Pwd=root
+      - Database__Greetings=Server=greetings-db;Uid=root;Pwd=root;Database=Greetings
+      - Database__GreetingsDb=Server=greetings-db;Uid=root;Pwd=root
     links:
-      - mysql:greetings_db
+      - mysql:greetings-db
     depends_on:
       - mysql
   mysql:
-    hostname: greetings_db
+    hostname: greetings-db
     image: mysql
     ports:
       - "3306:3306"

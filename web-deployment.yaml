@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    app.description: 12FactorTutorial
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe
+      convert -f docker-compose.yml
+    kompose.version: 1.14.0 (fa706f2)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: web
+    spec:
+      containers:
+      - env:
+        - name: Database__Greetings
+          value: Server=greetings-db;Uid=root;Pwd=root;Database=Greetings
+        - name: Database__GreetingsDb
+          value: Server=greetings-db;Uid=root;Pwd=root
+        image: web
+        name: web
+        ports:
+        - containerPort: 5000
+        resources: {}
+      hostname: greetingsweb
+      restartPolicy: Always
+status: {}
